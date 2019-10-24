@@ -66,22 +66,31 @@ elements.searchResPages.addEventListener('click', e =>{
  *  
  */
 
- const controlRecipe = () => {
+ const controlRecipe = async () => {
 
     // GET ID FROM URL
      const id = window.location.hash.replace('#','');
      console.log(id);
 
      if (id) {
+
          // PREPARE UI FOR CHANGES
+         state.recipe = new Recipe(id);
 
          // CREATE NEW RECICPE OBJECT
+         await state.recipe.getRecipe();
 
          // GET RECIPE DATA
-
-         // RENDER RECIPE
+         state.recipe.calcTime();
+         state.recipe.calcServing();
          
+         // RENDER RECIPE
+         console.log(state.recipe);
+
      }
  }
 
- window.addEventListener('hashchange', controlRecipe);
+ //window.addEventListener('hashchange', controlRecipe);
+ //window.addEventListener('load', controlRecipe);
+
+ ['hashchange', 'load'].forEach(event => window.addEventListener(event, controlRecipe));
