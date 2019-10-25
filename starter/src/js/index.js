@@ -97,7 +97,7 @@ elements.searchResPages.addEventListener('click', e =>{
      }
  }
 
- //window.addEventListener('hashchange', controlRecipe);
+ window.addEventListener('hashchange', controlRecipe);
  //window.addEventListener('load', controlRecipe);
 
- ['hashchange', 'load'].forEach(event => window.addEventListener(event, controlRecipe));
+ //['hashchange', 'load'].forEach(event => window.addEventListener(event, controlRecipe));
