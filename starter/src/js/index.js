@@ -84,8 +84,9 @@ elements.searchResPages.addEventListener('click', e =>{
          window.r = state.recipe;
 
          try{
-            // CREATE NEW RECICPE OBJECT
+            // CREATE NEW RECICPE OBJEC AND 
             await state.recipe.getRecipe();
+            state.recipe.parseIngredients();
 
             // GET RECIPE DATA
             state.recipe.calcTime();
