@@ -80,6 +80,9 @@ elements.searchResPages.addEventListener('click', e =>{
          // PREPARE UI FOR CHANGES
          state.recipe = new Recipe(id);
 
+         // FOR TESTING //
+         window.r = state.recipe;
+
          try{
             // CREATE NEW RECICPE OBJECT
             await state.recipe.getRecipe();
