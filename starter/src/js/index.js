@@ -1,5 +1,6 @@
 import Search from './models/Search';
 import * as searchView from './views/searchView';
+import * as recipeView from './views/recipeView';
 import { elements, renderLoader, clearLoader } from './views/base';
 import Recipe from './models/Recipe'
 
@@ -78,6 +79,10 @@ elements.searchResPages.addEventListener('click', e =>{
 
      if (id) {
          // PREPARE UI FOR CHANGES
+         recipeView.clearRecipe();
+         renderLoader(elements.recipe);
+         
+         // CREATE NEW RECIPE OBJECT
          state.recipe = new Recipe(id);
 
          // FOR TESTING //
@@ -93,9 +98,14 @@ elements.searchResPages.addEventListener('click', e =>{
             state.recipe.calcServing();
             
             // RENDER RECIPE
+            clearLoader();
             console.log(state.recipe);
+            recipeView.renderRecipe(state.recipe);
+
+
          }catch (error) {
              alert('Error processing recipe!!');
+             console.log(error);
          }
 
      }

@@ -36,6 +36,7 @@ export default class Recipe {
         
         const unitsLong = ['tablespoons', 'tablespoon', 'ounces', 'ounce', 'teaspoons', 'teaspoon', 'cups', 'pounds'];
         const unitShort = ['tbsp', 'tbsp', 'oz', 'oz', 'tsp', 'tsp', 'cup', 'pound'];
+        const units = [...unitShort, 'kg', 'g'];
 
         const newIngrediente = this.ingredients.map(el => {
             //1.- UNIFORM UNITS
@@ -46,11 +47,11 @@ export default class Recipe {
             });
 
             //2.- REMOVE PERENTHESES
-            ingredient = ingredient.replace(/ *\([^)]*\) */g, '');
+            ingredient = ingredient.replace(/ *\([^)]*\) */g, ' ');
 
             //3.- PARSE INGREDIENTS INTO COUNT, UNIT AND INGREDIENTE
             const arrIng = ingredient.split(' ');
-            const unitsIndex = arrIng.findIndex(el2 => unitShort.includes(el2));
+            const unitsIndex = arrIng.findIndex(el2 => units.includes(el2));
             
             let objIng; 
 
@@ -64,13 +65,13 @@ export default class Recipe {
                 if (arrCount.length === 1) {
                     count = eval(arrIng[0].replace('-', '+'));
                 } else {
-                    count = eval(arrIng.slice(0, unitIndex).join('+'));
+                    count = eval(arrIng.slice(0, unitsIndex).join('+'));
                 }
 
                 objIng = {
                     count,
-                    unit: arrIng[unitIndex],
-                    ingredient: arrIng.slice(unitIndex + 1).join(' ')
+                    unit: arrIng[unitsIndex],
+                    ingredient: arrIng.slice(unitsIndex + 1).join(' ')
                 };
 
             } else if (parseInt(arrIng[0],10))  {
