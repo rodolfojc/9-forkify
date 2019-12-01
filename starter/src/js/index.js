@@ -86,6 +86,9 @@ elements.searchResPages.addEventListener('click', e =>{
          // CREATE NEW RECIPE OBJECT
          state.recipe = new Recipe(id);
 
+         // HIGTLIGHT SELECTED SEARCH
+         if (state.search) searchView.highlightSelected(id);
+
          // FOR TESTING //
          window.r = state.recipe;
 
