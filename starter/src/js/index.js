@@ -1,8 +1,10 @@
 import Search from './models/Search';
+import Recipe from './models/Recipe';
+import List from './models/List';
 import * as searchView from './views/searchView';
 import * as recipeView from './views/recipeView';
 import { elements, renderLoader, clearLoader } from './views/base';
-import Recipe from './models/Recipe'
+
 
 /**
  * GLOBAL STATE OF THE APP
@@ -133,6 +135,7 @@ elements.searchResPages.addEventListener('click', e =>{
         // INCREASE IS CLICK
         state.recipe.updateServings('inc');
         recipeView.updateServingsIngredients(state.recipe);
-     }
-     console.log(state.recipe);
+     }     
  });
+
+ window.l = new List();
