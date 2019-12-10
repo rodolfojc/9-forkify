@@ -119,3 +119,20 @@ elements.searchResPages.addEventListener('click', e =>{
  //window.addEventListener('load', controlRecipe);
 
  //['hashchange', 'load'].forEach(event => window.addEventListener(event, controlRecipe));
+
+ // HANDELING RECIPE BUTTON CLICKS
+ elements.recipe.addEventListener('click', e => {
+     if (e.target.matches('.btn-decrease, .btn-decrease *')) {
+        // DECREASE IS CLICK
+        if (state.recipe.servings > 1) {
+            state.recipe.updateServings('dec');
+            recipeView.updateServingsIngredients(state.recipe);
+        }
+       
+     } else if (e.target.matches('.btn-increase, .btn-increase *')){
+        // INCREASE IS CLICK
+        state.recipe.updateServings('inc');
+        recipeView.updateServingsIngredients(state.recipe);
+     }
+     console.log(state.recipe);
+ });
