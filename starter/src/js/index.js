@@ -1,10 +1,12 @@
 import Search from './models/Search';
 import Recipe from './models/Recipe';
 import List from './models/List';
+import Likes from './models/Likes';
 import * as searchView from './views/searchView';
 import * as recipeView from './views/recipeView';
 import * as listView from './views/listView';
 import { elements, renderLoader, clearLoader } from './views/base';
+import Likes from './models/Likes';
 
 
 /**
@@ -124,9 +126,11 @@ elements.searchResPages.addEventListener('click', e =>{
  //['hashchange', 'load'].forEach(event => window.addEventListener(event, controlRecipe));
 
  /*
- * LIST CONTROLLER
- *
- */
+  * LIST CONTROLLER
+  *
+  */
+
+
 
 const controlList = () => {
 
@@ -139,6 +143,40 @@ const controlList = () => {
         listView.renderItem(item);
     });
 }
+
+/*
+ *
+ * LIKE CONTROLLER
+ *
+ */
+
+ const controlLike = () =>{
+    if (!state.likes) state.likes = new Likes();
+    const currentID = state.recipe.id;
+
+    // USER HAS NOT LIKED CURRENT RECIPE
+    if (!state.likes.isLiked(currentID)) {
+        // ADD LIKE TO THE STATE
+        const newLike = state.likes.addLike(
+            currentID,
+            state.recipe.title,
+            state.recipe.author,
+            state.recipe.img
+        );
+        // TOGGLE THE LIKE BUTTON
+
+        // ADD LIKE TO UI LIST
+
+    // USER HAS LIKED CURRENT RECIPE
+    } else {
+        // REMOVE LIKE TO THE STATE
+        state.likes.deleteLike(currentID);
+        // TOGGLE THE LIKE BUTTON
+
+        // REMOVE LIKE TO UI LIST
+    }
+ }
+
 
 // HANDLE DELETE AND UPDATE LIST ITEM EVENTS
 elements.shopping.addEventListener('click', e => {
@@ -173,7 +211,11 @@ elements.shopping.addEventListener('click', e => {
         state.recipe.updateServings('inc');
         recipeView.updateServingsIngredients(state.recipe);
      } else if (e.target.matches('.recipe__btn--add, .recipe__btn--add *')){
+        // ADD INGREDIENTES TO THE SHOPPING LIST
         controlList();
+     } else if (e.target.matches('.recipe__love, .recipe__love *')) {
+        // LIKE CONTROLLER
+        controlLike();
      }
  });
 
