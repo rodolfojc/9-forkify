@@ -138,11 +138,26 @@ const controlList = () => {
         const item = state.list.addItem(el.count, el.unit, el.ingredient);
         listView.renderItem(item);
     });
-
-
-
 }
 
+// HANDLE DELETE AND UPDATE LIST ITEM EVENTS
+elements.shopping.addEventListener('click', e => {
+    const id = e.target.closest('.shopping__item').dataset.itemid;
+
+    // HANDEL THE DELETE BUTTON
+    if(e.target.matches('.shopping__delete, .shopping__delete *')) {
+    // DELETE FROM STATE
+    state.list.deleteItem(id);
+
+    // DELETE FROM UI
+    listView.deleteItem(id);
+
+    // HANDELING THE COUNT 
+    } else if (e.target.matches('.shopping__count-vale')) {
+        const value = parseFloat(e.target.value, 10);
+        state.list.updateCount(id, value);
+    }
+});
 
  // HANDELING RECIPE BUTTON CLICKS
  elements.recipe.addEventListener('click', e => {
