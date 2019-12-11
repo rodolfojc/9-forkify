@@ -17,7 +17,7 @@ export const highlightSelected = id => {
         el.classList.remove('results__link--active');
     });
 
-    document.querySelector(`a[href="#${id}"]`).classList.add('results__link--active');
+    document.querySelector(`.results__link[href="#${id}"]`).classList.add('results__link--active');
 }
 // PASTA WITH TOMATO AND SPINACH
 /**
@@ -27,7 +27,7 @@ export const highlightSelected = id => {
  * acc = 15 / acc + cur.length = 18 / newTitle = ['PASTA', 'WITH', 'TOMATO']; // NO PASS
  * acc = 18 / acc + cur.length = 24 / newTitle = ['PASTA', 'WITH', 'TOMATO']; // NO PASS *  
  */
-const limitRecipeTitle = (title, limit = 17) => {
+export const limitRecipeTitle = (title, limit = 17) => {
     const newTitle = [];
     
     if(title.length > limit) {
