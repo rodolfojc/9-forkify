@@ -185,7 +185,22 @@ const controlList = () => {
         likesView.deleteLike(currentID);
     }
     likesView.toggleLikeMenu(state.like.getNumLikes());
- }
+ };
+
+ // RESTORE LIKE RECIPES FROM LOCALSTORAGE
+ likesView.addEventListener('load', () => {
+    state.likes = new Likes();
+    
+    // RESTORE LIKES
+    state.likes.readStorage();
+
+    // TOGGLE LIKE 
+    likesView.toggleLikeMenu(state.like.getNumLikes());
+
+    // RENDER THE EXISTING LIKES
+    state.likes.likes.forEach(like => likesView.renderLike(like));
+
+ });
 
 
 // HANDLE DELETE AND UPDATE LIST ITEM EVENTS
