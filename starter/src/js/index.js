@@ -243,5 +243,3 @@ elements.shopping.addEventListener('click', e => {
         controlLike();
      }
  });
-
- window.l = new List();
